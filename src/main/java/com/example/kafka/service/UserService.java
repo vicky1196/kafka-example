@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.kafka.domain.User;
 import com.example.kafka.repo.UserRepo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Service
 public class UserService {
@@ -26,7 +27,7 @@ public class UserService {
 	Producer producer;
 
 	@Transactional
-	public String addUser(User user) {
+	public String addUser(User user) throws JsonProcessingException {
 		logger.info("New User: {}", user);
 		User user1 = userRepo.save(user);
 		producer.sendMessage(userTopic, user1);

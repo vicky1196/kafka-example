@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.kafka.domain.User;
 import com.example.kafka.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 public class KafkaController {
@@ -22,7 +23,7 @@ public class KafkaController {
 	private static final Logger logger = LoggerFactory.getLogger(KafkaController.class);
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public ResponseEntity<?> addUser(@RequestBody User user) throws DataAccessException {
+	public ResponseEntity<?> addUser(@RequestBody User user) throws DataAccessException, JsonProcessingException {
 		logger.info("New user request received");
 		return ResponseEntity.ok(userService.addUser(user));
 	}
